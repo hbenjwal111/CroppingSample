@@ -132,6 +132,7 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, PictureCallbac
     private fun setupSurfaceHolder() {
         surfaceHolder = surfaceView.holder
         surfaceHolder.addCallback(this)
+        startCamera()
         setBtnClick()
     }
 
@@ -271,7 +272,7 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, PictureCallbac
                  file.delete()
              }
             fos = imageUri?.let { resolver.openOutputStream(it) }
-            Toast.makeText(this, "Image saved successfully", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Image saved to gallery", Toast.LENGTH_LONG).show()
         } else {
             val imagesDir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DCIM
@@ -283,7 +284,7 @@ class MainActivity : AppCompatActivity(), SurfaceHolder.Callback, PictureCallbac
             val image = File(imagesDir, "$name.png")
             fos = FileOutputStream(image)
         }
-        Toast.makeText(this, "Image saved successfully", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Image saved to gallery", Toast.LENGTH_LONG).show()
         saved = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
         fos?.flush()
         fos?.close()
